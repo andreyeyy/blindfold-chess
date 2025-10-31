@@ -22,6 +22,11 @@ import com.example.blindfoldchess.ui.theme.BlindfoldChessTheme
 import kotlin.random.Random
 import android.os.Handler
 import android.os.Looper
+import androidx.compose.foundation.layout.Box
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 
 class Mode1Activity : ComponentActivity() {
 
@@ -39,6 +44,8 @@ class Mode1Activity : ComponentActivity() {
         "g2", "g4", "g6", "g8", "h1", "h3", "h5", "h7"
     )
 
+    private var labelText by mutableStateOf("")
+
     private lateinit var tts: TTS
     private val handler = Handler(Looper.getMainLooper())
 
@@ -50,12 +57,17 @@ class Mode1Activity : ComponentActivity() {
     private fun sayNextSquare(){
         isLightSquare = Random.nextBoolean()
 
-        if (isLightSquare){
-            tts.say(lightSquares.random())
+
+        val nextSquare = if (isLightSquare){
+            lightSquares.random()
+        } else {
+            darkSquares.random()
         }
-        else {
-            tts.say(darkSquares.random())
-        }
+
+        tts.say(nextSquare)
+
+        labelText = "Is $nextSquare light or dark?"
+
         canClick = true
     }
 
@@ -64,8 +76,10 @@ class Mode1Activity : ComponentActivity() {
             canClick = false
             if (isLight == isLightSquare) {
                 tts.say("Yes")
+                labelText = "Yes!"
             } else {
                 tts.say("No")
+                labelText = "No"
             }
             handler.postDelayed({ sayNextSquare() }, saySquareDelay)
         }
@@ -84,6 +98,13 @@ class Mode1Activity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        Text(
+                            text = labelText,
+                            modifier = Modifier.align(Alignment.TopCenter).padding(top = 24.dp)
+                        )
+                    }
+
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
