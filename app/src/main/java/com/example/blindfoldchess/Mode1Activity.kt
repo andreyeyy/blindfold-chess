@@ -3,20 +3,14 @@ package com.example.blindfoldchess
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.blindfoldchess.ui.theme.BlindfoldChessTheme
 import kotlin.random.Random
@@ -115,7 +109,7 @@ class Mode1Activity : ComponentActivity() {
                             .padding(16.dp),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        SquareButton(
+                        AnswerButton(
                             text = "Light square",
                             onClick = {
                                 submitAnswer(true)
@@ -124,7 +118,7 @@ class Mode1Activity : ComponentActivity() {
                                 .weight(1f)
                                 .fillMaxSize()
                         )
-                        SquareButton(
+                        AnswerButton(
                             text = "Dark square",
                             onClick = {
                                 submitAnswer(false)
@@ -146,19 +140,3 @@ class Mode1Activity : ComponentActivity() {
 }
 
 
-@Composable
-fun SquareButton(
-    text: String,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    OutlinedButton(
-        onClick = onClick,
-        modifier = modifier,
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(2.dp, Color.Gray),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Gray)
-    ) {
-        Text(text)
-    }
-}

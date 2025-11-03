@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -74,12 +73,12 @@ fun MainScreen() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { context.startActivity(Intent(context, ModeSelectionActivity::class.java)) }) {
-                Text("Start")
-            }
-            Button(onClick = { context.startActivity(Intent(context, TutorialActivity::class.java)) }) {
-                Text("Tutorial")
-            }
+            MenuButton(
+                text="Start",
+                onClick = { context.startActivity(Intent(context, ModeSelectionActivity::class.java)) })
+            MenuButton(
+                text="Tutorial",
+                onClick = { context.startActivity(Intent(context, TutorialActivity::class.java)) })
         }
     }
 }
