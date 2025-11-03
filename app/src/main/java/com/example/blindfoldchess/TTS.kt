@@ -23,6 +23,10 @@ class TTS(context: Context) : TextToSpeech.OnInitListener {
         }
     }
 
+    fun stop() {
+        tts?.stop()
+    }
+
     fun say(text: String) {
         tts?.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }

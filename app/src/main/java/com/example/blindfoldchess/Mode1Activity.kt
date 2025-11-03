@@ -138,6 +138,11 @@ class Mode1Activity : ComponentActivity() {
             }
         }
     }
+
+    override fun onDestroy() {
+        tts.stop()
+        super.onDestroy()
+    }
 }
 
 
