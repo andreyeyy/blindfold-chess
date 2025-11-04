@@ -1,7 +1,10 @@
 package com.example.blindfoldchess
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -55,5 +58,35 @@ fun AnswerButton(
         colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Gray)
     ) {
         Text(text)
+    }
+}
+
+@Composable
+fun TwoButtonsChoice(
+    upperText: String,
+    bottomText: String,
+    upperOnClick: () -> Unit,
+    bottomOnClick: () -> Unit,
+){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        AnswerButton(
+            text = upperText,
+            onClick = upperOnClick,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxSize()
+        )
+        AnswerButton(
+            text = bottomText,
+            onClick = bottomOnClick,
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxSize()
+        )
     }
 }

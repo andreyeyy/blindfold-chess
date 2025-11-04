@@ -3,8 +3,6 @@ package com.example.blindfoldchess
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -103,31 +101,11 @@ class Mode1Activity : ComponentActivity() {
                         )
                     }
 
-                    Column(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        AnswerButton(
-                            text = "Light square",
-                            onClick = {
-                                submitAnswer(true)
-                            },
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxSize()
-                        )
-                        AnswerButton(
-                            text = "Dark square",
-                            onClick = {
-                                submitAnswer(false)
-                            },
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxSize()
-                        )
-                    }
+                    TwoButtonsChoice(
+                        upperText =  "Light square",
+                        bottomText =  "Dark square",
+                        upperOnClick = { submitAnswer(true) },
+                        bottomOnClick = { submitAnswer(false) })
                 }
             }
         }
