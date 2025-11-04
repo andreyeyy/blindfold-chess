@@ -21,6 +21,8 @@ class TTS(context: Context) : TextToSpeech.OnInitListener {
         } else {
             Log.e("TTS", "Initialization Failed!")
         }
+
+        say("") // pre-warm tts
     }
 
     fun stop() {
