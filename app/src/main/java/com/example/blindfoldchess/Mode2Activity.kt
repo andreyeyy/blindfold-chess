@@ -40,7 +40,7 @@ class Mode2Activity : ComponentActivity() {
         rankFrom: Int,
         directions: Array<Pair<Int, Int>>,
         maxDistance: Int = 1
-    ): List<Pair<Int, Int>> {
+    ): MutableList<Pair<Int, Int>> {
         val candidates = mutableListOf<Pair<Int, Int>>()
         for (distance in 1..maxDistance) {
             for ((df, dr) in directions) {
@@ -66,15 +66,20 @@ class Mode2Activity : ComponentActivity() {
         )
 
         val candidateMoves = generateCandidateMoves(fileFrom, rankFrom, directions, maxDistance)
-        val winnerMove = candidateMoves.random()
 
-        if (legal) return winnerMove
+        if (legal) return candidateMoves.random()
 
-        val candidateIllegalMoves = generateCandidateMoves(winnerMove.first, winnerMove.second, offset, 1)
-        val winnerIllegalMove = candidateIllegalMoves.random()
+        for (legalMove in candidateMoves.shuffled()) {
 
-        return winnerIllegalMove
+            val candidateIllegalMoves = generateCandidateMoves(legalMove.first, legalMove.second, offset, 1)
 
+            candidateIllegalMoves.removeAll { it in candidateMoves }
+            if (candidateIllegalMoves.isEmpty()) continue
+
+            return candidateIllegalMoves.random()
+        }
+
+        error("Couldn't find an illegal move")
     }
 
     private val sayMoveDelay = 1000L
